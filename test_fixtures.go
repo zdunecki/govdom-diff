@@ -38,7 +38,7 @@ func (f *fixtures) loadVNodeFromFile(fileName string) (*VNode, error) {
 		return nil, err
 	}
 
-	vnode, err := NewEncoder().EncodeHTML(diffHTML)
+	vnode, err := NewHTMLEncoder(diffHTML).EncodeToVNode()
 	if err != nil {
 		return nil, err
 	}
@@ -52,9 +52,9 @@ func (f *fixtures) vNodeFromFileToJSON(fileName string) ([]byte, error) {
 		return nil, nil
 	}
 
-	d := NewDecoder(vnode)
+	d := NewVNodeEncoder(vnode)
 
-	htmlJSON, err := d.ToJSON()
+	htmlJSON, err := d.EncodeToJSON()
 	if err != nil {
 		return nil, nil
 	}
@@ -87,7 +87,7 @@ func (f *fixtures) encodeHTMLFromFile(fileName string) (*VNode, error) {
 		return nil, err
 	}
 
-	return NewEncoder().EncodeHTML(htmlNode)
+	return NewHTMLEncoder(htmlNode).EncodeToVNode()
 }
 
 func (f *fixtures) patchFromFile(fileName, fileName2 string) (*VNode, error) {

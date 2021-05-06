@@ -13,6 +13,8 @@ func Diff(oldNode, newNode *VNode) PatchList {
 	return patches
 }
 
+// TODO: bugs in patch remove and replace - indalid nodes are marked
+
 // diff is internal function for Diff
 // hides technical details
 func diff(oldNode, newNode *VNode, patches *PatchList) {
